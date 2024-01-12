@@ -1,9 +1,15 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
+import yaml
+
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://myuser:mypassword@localhost:5432/mydatabase'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+with open('config.yaml', 'r') as config_file:
+    config_data = yaml.safe_load(config_file)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = config_data['database']['uri']
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = config_data['database']['track_modifications']
+
 
 db = SQLAlchemy(app)
 

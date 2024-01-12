@@ -1,0 +1,3 @@
+database:
+  uri: 'postgresql://myuser:mypassword@localhost:5432/mydatabase'
+  track_modifications: false
